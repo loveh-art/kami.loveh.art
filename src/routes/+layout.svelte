@@ -1,37 +1,35 @@
 <script>
-    import Loader from "$lib/components/Loader.svelte";
-    import Navbar from "$lib/components/Navbar.svelte";
-    import { onMount, setContext } from "svelte";
-    import { writable } from "svelte/store";
-    import { crossfade, fade } from "svelte/transition";
+  import Loader from "$lib/components/Loader.svelte";
+  import { onMount, setContext } from "svelte";
+  import { writable } from "svelte/store";
 
+  let loading = writable(true);
+  setContext("loading", loading);
 
-    let loading = writable(true);
-    setContext("loading", loading);
+  let mounted = writable(false);
 
-    let mounted = writable(false);
-    
-    onMount(() => {
-        setTimeout(() => {
-            mounted.set(true);
-        },
-        // 500);
-        1);
-    });
-
+  onMount(() => {
+    setTimeout(
+      () => {
+        mounted.set(true);
+      },
+      // 500);
+      1,
+    );
+  });
 </script>
 
-<!-- <Loader /> -->
+<Loader />
 {#if mounted}
-<div id="app-root">
-    <Navbar />
-    <slot></slot>
-</div>
+  <div id="app-root">
+    <!-- <Navbar /> -->
+    <slot />
+  </div>
 {/if}
 
 <style>
-    #app-root {
-        position: relative;
-        z-index: 1;
-    }
+  #app-root {
+    position: relative;
+    z-index: 1;
+  }
 </style>

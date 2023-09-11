@@ -1,19 +1,20 @@
-import adapter from '@sveltejs/adapter-auto';
-import { vitePreprocess } from '@sveltejs/kit/vite';
+import adapter_cloudflare from "@sveltejs/adapter-cloudflare";
+import { vitePreprocess } from "@sveltejs/kit/vite";
+
+/** @type {import('@sveltejs/kit').Adapter} */
+let adapter;
+if (typeof Bun === "undefined") adapter = adapter_cloudflare();
+else adapter = require("svelte-adapter-bun").default();
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	// Consult https://kit.svelte.dev/docs/integrations#preprocessors
-	// for more information about preprocessors
-	preprocess: vitePreprocess(),
+  // Consult https://kit.svelte.dev/docs/integrations#preprocessors
+  // for more information about preprocessors
+  preprocess: vitePreprocess(),
 
-	kit: {
-		adapter: (() => {
-			// @ts-ignore
-			if (typeof Bun === "undefined") return adapter(); // if no bun then cf pages
-			return require("svelte-adapter-bun").default(); // if bun then bun
-		})()
-	}
+  kit: {
+    adapter,
+  },
 };
 
 export default config;
