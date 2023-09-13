@@ -1,16 +1,17 @@
 <script lang="ts">
-  import { buildingProjects, completedProjects } from "$lib/data/gdProjects";
-  import { AVAILABLE_FOR_COLLABS, hardest_completion } from "$lib/data/aboutme";
-  import GdProject from "$lib/components/GdProject.svelte";
-  import CelesteProject from "$lib/components/CelesteProject.svelte";
-  import type { GdUser } from "$lib/types/gdapi";
   import { onMount } from "svelte";
-  import DifficultyFace from "$lib/components/DifficultyFace.svelte";
   import { writable } from "svelte/store";
-  import tooltip from "$lib/tooltip";
-  import Usernames from "$lib/data/usernames.json";
+
+  import CelesteProject from "$lib/components/CelesteProject.svelte";
+  import DifficultyFace from "$lib/components/DifficultyFace.svelte";
+  import GdProject from "$lib/components/GdProject.svelte";
+  import { AVAILABLE_FOR_COLLABS, hardest_completion } from "$lib/data/aboutme";
   import { CelesteProjects } from "$lib/data/celeste/projects";
+  import { buildingProjects, completedProjects } from "$lib/data/gdProjects";
   import { registerLoading } from "$lib/data/loading";
+  import Usernames from "$lib/data/usernames.json";
+  import tooltip from "$lib/tooltip";
+  import type { GdUser } from "$lib/types/gdapi";
 
   const kamiData = writable<GdUser | undefined>();
 

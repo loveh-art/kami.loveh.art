@@ -1,6 +1,7 @@
 <script lang="ts">
-  import Fa from "svelte-fa";
   import { faYoutube } from "@fortawesome/free-brands-svg-icons";
+  import Fa from "svelte-fa";
+
   import type { CelesteProject } from "$lib/data/celeste/projects";
   export let project: CelesteProject;
 </script>

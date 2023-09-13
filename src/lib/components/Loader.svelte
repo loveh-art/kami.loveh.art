@@ -1,10 +1,10 @@
 <script lang="ts">
-  import spin from "$lib/transitions/spin";
   import { getContext } from "svelte";
   import { backInOut } from "svelte/easing";
-  import { writable, type Writable } from "svelte/store";
-
+  import { type Writable, writable } from "svelte/store";
   import { draw, fade } from "svelte/transition";
+
+  import spin from "$lib/transitions/spin";
 
   const waitingToLoad =
     getContext<Writable<boolean[]>>("waitingToLoad") || writable<boolean[]>([]);

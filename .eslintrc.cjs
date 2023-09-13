@@ -29,11 +29,20 @@ module.exports = {
     },
     // ...
   ],
-  plugins: ["@typescript-eslint", "prettier"],
+  plugins: ["@typescript-eslint", "prettier", "simple-import-sort"],
   rules: {
     // unused import
     "@typescript-eslint/no-unused-vars": 1,
     "prettier/prettier": 2, // Means error
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+  },
+  settings: {
+    "import/resolver": {
+      typescript: {
+        project: "./tsconfig.json",
+      },
+    },
   },
   env: {
     browser: true,
