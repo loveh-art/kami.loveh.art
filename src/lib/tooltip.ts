@@ -32,5 +32,9 @@ export default function tooltip(element: HTMLElement, text: string) {
       element.removeEventListener("mouseleave", mouseLeave);
       element.removeEventListener("mousemove", mouseMove);
     },
+    update(newText: string) {
+      text = newText;
+      tooltipComponent.$set({ text });
+    },
   };
 }
