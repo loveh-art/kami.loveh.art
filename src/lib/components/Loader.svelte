@@ -10,15 +10,10 @@
   let timer = writable(false);
   setTimeout(() => {
     timer.set(true);
-  }, 2500);
-
-  let mounted = writable(false);
-  onMount(() => {
-    mounted.set(true);
-  });
+  }, 1000);
 </script>
 
-{#if (!$timer || $loading) && $mounted}
+{#if !$timer || $loading}
   <div
     id="loader-cover"
     class:drawUp={$timer && !$loading}

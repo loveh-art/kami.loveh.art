@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { DIFFICULTY_TO_FACE } from "$lib/data/mappings";
-
   export let difficulty: string = "AUTO";
 
-  const face = DIFFICULTY_TO_FACE[difficulty.toUpperCase().replace(" ", "_")];
+  const face = `/images/gdFaces/${difficulty
+    .toLowerCase()
+    .replace(" ", "")}.png`;
 </script>
 
 <img src={face} alt={difficulty} />

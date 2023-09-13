@@ -15,16 +15,10 @@
     const res = await fetch("https://gdbrowser.com/api/profile/kkamila");
     const data = await res.json();
     kamiData.set(data);
+
+    loading.set(false);
   });
 </script>
-
-<svelte:window
-  on:keyup|preventDefault={(e) => {
-    if (e.key === "Escape") {
-      loading.set(false);
-    }
-  }}
-/>
 
 <h1>Building Projects</h1>
 {#each gdProjects.filter((proj) => !proj.completed) as project}
