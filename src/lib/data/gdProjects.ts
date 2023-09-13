@@ -30,3 +30,10 @@ export const projects: GdProject[] = [
     youtube: "https://www.youtube.com/watch?v=oIN2RL5Sevc",
   },
 ];
+
+export const buildingProjects = projects.filter(
+  (project) => !project.completed,
+);
+export const completedProjects = projects.filter(
+  (project) => project.completed,
+);

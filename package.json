@@ -31,8 +31,10 @@
   },
   "type": "module",
   "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^6.4.2",
     "@sveltejs/adapter-cloudflare": "^2.3.3",
     "sass": "^1.66.1",
-    "svelte-adapter-bun": "^0.5.0"
+    "svelte-adapter-bun": "^0.5.0",
+    "svelte-fa": "^3.0.4"
   }
 }

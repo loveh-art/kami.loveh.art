@@ -1,6 +1,6 @@
 <script>
   import Loader from "$lib/components/Loader.svelte";
-  import { onMount, setContext } from "svelte";
+  import { setContext } from "svelte";
   import { writable } from "svelte/store";
   import "$lib/theme.scss";
 

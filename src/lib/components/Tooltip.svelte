@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let title: string;
+  export let text: string;
   export let x: number;
   export let y: number;
 </script>
@@ -9,7 +9,9 @@
 		top: {y + 5}px;
 		left: {x + 5}px;"
 >
-  {title}
+  {#each text.split("\n") as line}
+    <span>{line}</span>
+  {/each}
 </div>
 
 <style>
@@ -20,5 +22,7 @@
     border-radius: 4px;
     padding: 4px;
     position: absolute;
+    display: flex;
+    flex-direction: column;
   }
 </style>

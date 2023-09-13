@@ -1,19 +1,24 @@
 <script lang="ts">
-  import { projects as gdProjects } from "$lib/data/gdProjects";
+  import { buildingProjects, completedProjects } from "$lib/data/gdProjects";
   import { AVAILABLE_FOR_COLLABS, hardest_completion } from "$lib/data/aboutme";
   import GdProject from "$lib/components/GdProject.svelte";
+  import CelesteProject from "$lib/components/CelesteProject.svelte";
   import type { GdUser } from "$lib/types/gdapi";
   import { getContext, onMount } from "svelte";
   import DifficultyFace from "$lib/components/DifficultyFace.svelte";
   import { writable, type Writable } from "svelte/store";
   import tooltip from "$lib/tooltip";
+  import Usernames from "$lib/data/usernames.json";
+  import { CelesteProjects } from "$lib/data/celeste/projects";
 
   let loading = getContext<Writable<boolean>>("loading");
 
   const kamiData = writable<GdUser | undefined>();
 
   onMount(async () => {
-    const res = await fetch("https://gdbrowser.com/api/profile/kkamila");
+    const res = await fetch(
+      `https://gdbrowser.com/api/profile/${Usernames.Gd}`,
+    );
     const data = await res.json();
     kamiData.set(data);
 
@@ -21,14 +26,18 @@
   });
 </script>
 
-<h1>Building Projects</h1>
-{#each gdProjects.filter((proj) => !proj.completed) as project}
-  <GdProject {project} />
-{/each}
-<h1>Completed Projects</h1>
-{#each gdProjects.filter((proj) => proj.completed) as project}
-  <GdProject {project} />
-{/each}
+{#if buildingProjects.length > 0}
+  <h1>Building Projects</h1>
+  {#each buildingProjects as project}
+    <GdProject {project} />
+  {/each}
+{/if}
+{#if completedProjects.length > 0}
+  <h1>Completed Projects</h1>
+  {#each completedProjects as project}
+    <GdProject {project} />
+  {/each}
+{/if}
 
 <h1>Hardest Completion</h1>
 <b>{hardest_completion.name}</b>
@@ -36,28 +45,32 @@
 <span>{hardest_completion.attempts} attempts</span>
 <span>Beaten on {hardest_completion.date}</span>
 
-{#if $kamiData}
-  <h1>Gd Stats</h1>
-  <span use:tooltip={"Stars"}>{$kamiData.stars}</span>
-  <span use:tooltip={"Demons"}>{$kamiData.demons}</span>
-  <span use:tooltip={"Creator Points"}>{$kamiData.cp}</span>
-  <span
-    use:tooltip={`${
-      !AVAILABLE_FOR_COLLABS ? "Not a" : "A"
-    }vailable for collabs`}
-  >
-    {AVAILABLE_FOR_COLLABS ? "yes" : "no"}
-  </span>
-{/if}
+<h1>Gd Stats</h1>
+<span use:tooltip={"Stars"}>{$kamiData?.stars || "Loading..."}</span>
+<span use:tooltip={"Demons"}>{$kamiData?.demons || "Loading..."}</span>
+<span use:tooltip={"Creator Points"}>{$kamiData?.cp || "Loading..."}</span>
+<span
+  use:tooltip={`${!AVAILABLE_FOR_COLLABS ? "Not a" : "A"}vailable for collabs`}
+>
+  {AVAILABLE_FOR_COLLABS ? "yes" : "no"}
+</span>
 
-<h1>Celeste Info</h1>
-<!-- TODO -->
+{#if CelesteProjects.length > 0}
+  <h1>Celeste Info</h1>
+  {#each CelesteProjects as project}
+    <CelesteProject {project} />
+  {/each}
+{/if}
 
 <div class="aboutme">
   <span>Hello!~ My name is</span>
-  <span class="green noRightSpace">
+  <span
+    class="green noRightSpace"
+    use:tooltip={Object.entries(Usernames)
+      .map(([name, username]) => `${name}: ${username}`)
+      .join("\n")}
+  >
     Kamila
-    <!-- TODO: show gd name and discord on hover -->
   </span>
   <span>, but you can call me Kami!</span>
   <span class="green" use:tooltip={"2/12/2007"}>I'm a 16 year old</span>
@@ -80,7 +93,7 @@
     !~ I'm fairly active online and am usually available to chat if you add me
     on
   </span>
-  <span class="green" use:tooltip={"kamila0."}>Discord</span>
+  <span class="green" use:tooltip={Usernames.Discord}>Discord</span>
 </div>
 
 <style>

@@ -5,7 +5,7 @@ export default function tooltip(element: HTMLElement, text: string) {
   function mouseOver(event: MouseEvent) {
     tooltipComponent = new Tooltip({
       props: {
-        title: text,
+        text,
         x: event.pageX,
         y: event.pageY,
       },
