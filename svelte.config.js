@@ -1,10 +1,11 @@
 import adapter_cloudflare from "@sveltejs/adapter-cloudflare";
+import adapter_bun from "svelte-adapter-bun";
 import { vitePreprocess } from "@sveltejs/kit/vite";
 
 /** @type {import('@sveltejs/kit').Adapter} */
 let adapter;
 if (typeof Bun === "undefined") adapter = adapter_cloudflare();
-else adapter = require("svelte-adapter-bun").default();
+else adapter = adapter_bun();
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {

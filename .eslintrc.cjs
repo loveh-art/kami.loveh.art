@@ -23,6 +23,10 @@ module.exports = {
         parser: "@typescript-eslint/parser",
       },
     },
+    {
+      extends: ["plugin:@typescript-eslint/disable-type-checked"],
+      files: ["./.eslintrc.cjs", "./svelte.config.js"],
+    },
     // ...
   ],
   plugins: ["@typescript-eslint", "prettier"],
