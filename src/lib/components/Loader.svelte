@@ -1,6 +1,6 @@
 <script lang="ts">
   import spin from "$lib/transitions/spin";
-  import { getContext, setContext } from "svelte";
+  import { getContext } from "svelte";
   import { backInOut } from "svelte/easing";
   import { writable, type Writable } from "svelte/store";
 

@@ -4,9 +4,9 @@
   import GdProject from "$lib/components/GdProject.svelte";
   import CelesteProject from "$lib/components/CelesteProject.svelte";
   import type { GdUser } from "$lib/types/gdapi";
-  import { getContext, onMount } from "svelte";
+  import { onMount } from "svelte";
   import DifficultyFace from "$lib/components/DifficultyFace.svelte";
-  import { writable, type Writable } from "svelte/store";
+  import { writable } from "svelte/store";
   import tooltip from "$lib/tooltip";
   import Usernames from "$lib/data/usernames.json";
   import { CelesteProjects } from "$lib/data/celeste/projects";
@@ -96,8 +96,11 @@
   <span>! I'm currently in a poly relationship with my lovely partners</span>
   <a href="https://aenri.loveh.art" target="_blank" class="pink">Aenri</a>
   <span>&</span>
-  <a href="https://luna.loveh.art" target="_blank" class="purpl noRightSpace"
-    >Luna</a
+  <a
+    href="https://luna.loveh.art"
+    target="_blank"
+    class="purpl noRightSpace"
+    use:tooltip={"look mom! im on the website!"}>Luna</a
   >
   <span>
     !~ I'm fairly active online and am usually available to chat if you add me
