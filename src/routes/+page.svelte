@@ -72,14 +72,12 @@
     furry
   </p>
   <p>! I'm currently in a poly relationship with my lovely partners</p>
-  <a
-    href="https://aenri.loveh.art"
-    target="_blank"
-    class="pink">Aenri</a
-  >
+  <a href="https://aenri.loveh.art" target="_blank" class="pink">Aenri</a>
   <p>&</p>
-  <a href="https://luna.loveh.art" target="_blank" class="pastelPurple">Luna</a
-  >
-  <p>!~ I'm fairly active online and am usually available to chat if you add me on</p>
+  <a href="https://luna.loveh.art" target="_blank" class="pastelPurple">Luna</a>
+  <p>
+    !~ I'm fairly active online and am usually available to chat if you add me
+    on
+  </p>
   <p class="green" data-hover-text="kamila0.">Discord</p>
 </div>

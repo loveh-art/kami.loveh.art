@@ -3,24 +3,28 @@
   export let project: GdProject;
 </script>
 
-<div class="wrapper"
-on:click={() => project.youtube && window.open(project.youtube, "_blank")}
-on:keydown={(e) => e.key === "Enter" && project.youtube && window.open(project.youtube, "_blank")}
-tabindex="0"
-role="button"
-aria-roledescription="project"
+<div
+  class="wrapper"
+  on:click={() => project.youtube && window.open(project.youtube, "_blank")}
+  on:keydown={(e) =>
+    e.key === "Enter" &&
+    project.youtube &&
+    window.open(project.youtube, "_blank")}
+  tabindex="0"
+  role="button"
+  aria-roledescription="project"
 >
   {#if project.image}
-    <div class="background" style:background={`url("${project.image}")`}/>
+    <div class="background" style:background={`url("${project.image}")`} />
   {:else if project.color}
-    <div class="background" style:background-color={project.color}/>
+    <div class="background" style:background-color={project.color} />
   {/if}
-  <div class="background" style:background-color="rgba(255,255,255,0.5)"/>
+  <div class="background" style:background-color="rgba(255,255,255,0.5)" />
   <p>{project.name}</p>
   <p>{project.description}</p>
 
-  {#each (project.collabMembers || []) as member}
-    <p>{member.name} - {member.role}</p>  
+  {#each project.collabMembers || [] as member}
+    <p>{member.name} - {member.role}</p>
   {/each}
 
   <div class="topright">
