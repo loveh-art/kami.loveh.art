@@ -10,19 +10,24 @@
   import tooltip from "$lib/tooltip";
   import Usernames from "$lib/data/usernames.json";
   import { CelesteProjects } from "$lib/data/celeste/projects";
-
-  let loading = getContext<Writable<boolean>>("loading");
+  import { registerLoading } from "$lib/data/loading";
 
   const kamiData = writable<GdUser | undefined>();
 
-  onMount(async () => {
-    const res = await fetch(
-      `https://gdbrowser.com/api/profile/${Usernames.Gd}`,
-    );
-    const data = await res.json();
-    kamiData.set(data);
+  const finishLoading = registerLoading();
 
-    loading.set(false);
+  onMount(async () => {
+    try {
+      const res = await fetch(
+        `https://gdbrowser.com/api/profile/${Usernames.Gd}`,
+      );
+      const data = await res.json();
+      kamiData.set(data);
+    } catch (e) {
+      console.error(e);
+    }
+
+    finishLoading();
   });
 </script>
 
@@ -45,15 +50,19 @@
 <span>{hardest_completion.attempts} attempts</span>
 <span>Beaten on {hardest_completion.date}</span>
 
-<h1>Gd Stats</h1>
-<span use:tooltip={"Stars"}>{$kamiData?.stars || "Loading..."}</span>
-<span use:tooltip={"Demons"}>{$kamiData?.demons || "Loading..."}</span>
-<span use:tooltip={"Creator Points"}>{$kamiData?.cp || "Loading..."}</span>
-<span
-  use:tooltip={`${!AVAILABLE_FOR_COLLABS ? "Not a" : "A"}vailable for collabs`}
->
-  {AVAILABLE_FOR_COLLABS ? "yes" : "no"}
-</span>
+{#if $kamiData}
+  <h1>Gd Stats</h1>
+  <span use:tooltip={"Stars"}>{$kamiData?.stars}</span>
+  <span use:tooltip={"Demons"}>{$kamiData?.demons}</span>
+  <span use:tooltip={"Creator Points"}>{$kamiData?.cp}</span>
+  <span
+    use:tooltip={`${
+      !AVAILABLE_FOR_COLLABS ? "Not a" : "A"
+    }vailable for collabs`}
+  >
+    {AVAILABLE_FOR_COLLABS ? "yes" : "no"}
+  </span>
+{/if}
 
 {#if CelesteProjects.length > 0}
   <h1>Celeste Info</h1>
@@ -62,6 +71,7 @@
   {/each}
 {/if}
 
+<h1>About Me</h1>
 <div class="aboutme">
   <span>Hello!~ My name is</span>
   <span

@@ -1,16 +1,21 @@
 <script lang="ts">
   import spin from "$lib/transitions/spin";
-  import { getContext } from "svelte";
+  import { getContext, setContext } from "svelte";
   import { backInOut } from "svelte/easing";
-  import type { Writable } from "svelte/store";
+  import { writable, type Writable } from "svelte/store";
 
   import { draw, fade } from "svelte/transition";
 
-  let loading = getContext<Writable<boolean>>("loading");
+  const waitingToLoad =
+    getContext<Writable<boolean[]>>("waitingToLoad") || writable<boolean[]>([]);
 </script>
 
-{#if $loading}
-  <div id="loader-cover" class:drawUp={!$loading} out:fade={{ duration: 2000 }}>
+{#if $waitingToLoad.length > 0}
+  <div
+    id="loader-cover"
+    class:drawUp={$waitingToLoad.length === 0}
+    out:fade={{ duration: 2000 }}
+  >
     <svg
       width="145"
       height="145"

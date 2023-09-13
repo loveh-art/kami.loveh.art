@@ -1,11 +1,17 @@
-<script>
+<script lang="ts">
   import Loader from "$lib/components/Loader.svelte";
-  import { setContext } from "svelte";
+  import { onMount, setContext } from "svelte";
   import { writable } from "svelte/store";
   import "$lib/theme.scss";
+  import { registerLoading } from "$lib/data/loading";
 
-  let loading = writable(true);
-  setContext("loading", loading);
+  const waitingToLoad = writable<boolean[]>([]);
+  setContext("waitingToLoad", waitingToLoad);
+
+  const finishLoading = registerLoading();
+  onMount(() => {
+    finishLoading();
+  });
 </script>
 
 <Loader />
