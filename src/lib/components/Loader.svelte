@@ -2,23 +2,15 @@
   import spin from "$lib/transitions/spin";
   import { getContext, onMount } from "svelte";
   import { backInOut } from "svelte/easing";
-  import { type Writable, writable } from "svelte/store";
+  import type { Writable } from "svelte/store";
 
   import { draw, fade } from "svelte/transition";
 
   let loading = getContext<Writable<boolean>>("loading");
-  let timer = writable(false);
-  setTimeout(() => {
-    timer.set(true);
-  }, 1000);
 </script>
 
-{#if !$timer || $loading}
-  <div
-    id="loader-cover"
-    class:drawUp={$timer && !$loading}
-    out:fade={{ duration: 2000 }}
-  >
+{#if $loading}
+  <div id="loader-cover" class:drawUp={!$loading} out:fade={{ duration: 2000 }}>
     <svg
       width="145"
       height="145"

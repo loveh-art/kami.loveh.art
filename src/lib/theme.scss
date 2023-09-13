@@ -1,0 +1,33 @@
+:root {
+  --background-color: #000000;
+  --text-color: #fff;
+  --link-color: #7dfaa2;
+  --banner-background: #0D1B16;
+  --banner-border: #91FABE;
+  --banner-text: #91FABE;
+  --footer-link-color: #7dfaa2;
+  --footer-link-inner: #fff;
+
+
+  --aenri-pink: #f397ab;
+  --luna-purple: #a88fec;
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.green {
+  color: var(--link-color);
+}
+.pink {
+  color: var(--aenri-pink);
+}
+.purple {
+  color: var(--luna-purple);
+}
